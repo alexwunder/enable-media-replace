@@ -33,6 +33,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Use the standard Wordpress behavior in Media Library: 
+// Display replace media only if user capability 'edit_post' on media-post
+define('AW_STDWP_BEHAVIOR', true);
+
 /* Not sure why we define this?
 if(!defined("S3_UPLOADS_AUTOENABLE")) {
     define('S3_UPLOADS_AUTOENABLE', true);

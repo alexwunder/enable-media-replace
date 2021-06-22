@@ -299,23 +299,32 @@ class EnableMediaReplacePlugin
     return $mime_types;
   }
 
-  /**
+   /**
    * Function called by filter 'media_row_actions'
    * Enables linking to EMR straight from the media library
   */
   public function add_media_action( $actions, $post) {
-  	$url = $this->getMediaReplaceURL($post->ID);
-  	$action = "media_replace";
-    	$editurl = wp_nonce_url( $url, $action );
+    if ( defined( 'AW_STDWP_BEHAVIOR' ) ) {
+      // ToDo: \wp-admin\includes\class-wp-media-list-table.php
+      // ToDo: private function _get_row_actions( $post, $att_title ) {
+      // ToDo: Check "&& ! $this->is_trash" and the Attached way
+      if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+        return $actions;
+      }
+    }
 
+    $url = $this->getMediaReplaceURL($post->ID);
+    $action = "media_replace";
+    $editurl = wp_nonce_url( $url, $action );
+    
     /* See above, not needed.
-  	if (FORCE_SSL_ADMIN) {
-  		$editurl = str_replace("http:", "https:", $editurl);
-  	} */
-  	$link = "href=\"$editurl\"";
-
-  	$newaction['adddata'] = '<a ' . $link . ' aria-label="' . esc_attr__("Replace media", "enable-media-replace") . '" rel="permalink">' . esc_html__("Replace media", "enable-media-replace") . '</a>';
-  	return array_merge($actions,$newaction);
+    if (FORCE_SSL_ADMIN) {
+      $editurl = str_replace("http:", "https:", $editurl);
+    } */
+    $link = "href=\"$editurl\"";
+    
+    $newaction['adddata'] = '<a ' . $link . ' aria-label="' . esc_attr__("Replace media", "enable-media-replace") . '" rel="permalink">' . esc_html__("Replace media", "enable-media-replace") . '</a>';
+    return array_merge($actions,$newaction);
   }
 
 

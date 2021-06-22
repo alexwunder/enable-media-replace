@@ -28,6 +28,13 @@ $table_name = $wpdb->prefix . "posts";
 
 $attachment_id = intval($_GET['attachment_id']);
 $attachment = get_post($attachment_id);
+
+if ( defined( 'AW_STDWP_BEHAVIOR' ) ) {
+  if ( ! current_user_can( 'edit_post', $attachment->ID ) ) {
+    wp_die( esc_html__('You do not have permission to replace this file: ' . $attachment->guid, 'enable-media-replace') );
+  }
+}
+
 $replacer = new Replacer($attachment_id);
 
 $file = $replacer->getSourceFile();
