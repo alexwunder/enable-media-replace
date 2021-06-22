@@ -25,6 +25,13 @@ $uihelper = new UIHelper();
 
 // Get old guid and filetype from DB
 $post_id = intval($_POST['ID']); // sanitize, post_id.
+
+if ( defined( 'AW_STDWP_BEHAVIOR' ) ) {
+	if ( !current_user_can( 'edit_post', $post_id ) ) {
+	  wp_die( esc_html__('You do not have permission to replace this file.', 'enable-media-replace') );
+  }
+}
+
 $replacer = new Replacer($post_id);
 
 // Massage a bunch of vars
