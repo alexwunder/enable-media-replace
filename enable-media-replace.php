@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Enable Media Replace
- * Plugin URI: https://wordpress.org/plugins/enable-media-replace/
+ * Plugin URI: https://github.com/alexwunder/enable-media-replace
  * Description: Enable replacing media files by uploading a new file in the "Edit Media" section of the WordPress Media Library
- * Version: 3.5.0
+ * Version: 3.5.0.1
  * Author: ShortPixel
  * Author URI: https://shortpixel.com
- * GitHub Plugin URI: https://github.com/short-pixel-optimizer/enable-media-replace
+ * GitHub Plugin URI: https://github.com/alexwunder/enable-media-replace
  * Text Domain: enable-media-replace
  * Domain Path: /languages
  * Dual licensed under the MIT and GPL licenses:
